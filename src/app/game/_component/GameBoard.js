@@ -13,27 +13,29 @@ const GameBoard = ({ tiles, players, diceType }) => {
   if (currentPlayer.position === 100)
     return <>Congratulation Player {currentPlayer.id} have won</>;
   return (
-    <div className="grid grid-cols-10 gap-1 p-4">
-      {tiles.map((tile, index) => (
-        <div key={index} className="min-h-20 bg-white border border-gray-200">
-          <div className="player player-1">
-            <span className="text-black text-center font-bold">
-              {tile.number}
-            </span>
+    <>
+      <div className="grid grid-cols-10 gap-1 p-4">
+        {tiles.map((tile, index) => (
+          <div key={index} className="min-h-20 bg-white border border-gray-200">
+            <div className="player player-1">
+              <span className="text-black text-center font-bold">
+                {tile.number}
+              </span>
+            </div>
+            <div className="player player-2 flex justify-center items-center">
+              <Player players={[currentPlayer]} tileNumber={tile.number} />
+              <Snakes tileNumber={tile.number} />
+              <Ladders tileNumber={tile.number} />
+            </div>
           </div>
-          <div className="player player-2 flex justify-center items-center">
-            <Player players={[currentPlayer]} tileNumber={tile.number} />
-            <Snakes tileNumber={tile.number} />
-            <Ladders tileNumber={tile.number} />
-          </div>
-        </div>
-      ))}
+        ))}
+      </div>
       <Dice
         diceType={diceType}
         playerCurrentPosition={currentPlayer.position}
         setPlayerNewPosition={(pos) => handlePlayerMove(pos)}
       />
-    </div>
+    </>
   );
 };
 
